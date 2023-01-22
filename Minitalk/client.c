@@ -3,76 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jddperez <jddperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jperez-j <jperez-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:01:44 by jperez-j          #+#    #+#             */
-/*   Updated: 2022/12/21 14:22:15 by jddperez         ###   ########.fr       */
+/*   Created: 2023/01/15 13:53:53 by jperez-j          #+#    #+#             */
+/*   Updated: 2023/01/18 16:43:33 by jperez-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	check_pid(char c)
+void	ft_get_binary(char c, int pid)
 {
-	if (c < '0' && c > '9')
-	{
-		ft_printf("error: invalid PID\n");
-		exit(EXIT_FAILURE);
-	}
-}
+	int	bits;
 
-void	get_binary(char c, int pid)
-{
-	int	counter;
-
-	counter = 0;
-	while (c != 0)
+	bits = 0;
+	while (bits < 8)
 	{
-		if ((c % 2) == 0)
-		{
-			kill(pid, SIGUSR2);
-			ft_printf("0");
-		}
-		else
-		{
+		if ((c & (0x01 << bits)) != 0)
 			kill(pid, SIGUSR1);
-			ft_printf("1");
-		}
-		c = c / 2;
-		counter++;
+		else
+			kill(pid, SIGUSR2);
+		usleep(100);
+		bits++;
 	}
-	while (counter < 8)
-	{
-		kill(pid, SIGUSR2);
-		ft_printf("0");
-		counter++;
-	}
-	ft_printf("\n");
 }
 
 int	main(int argc, char **argv)
 {
 	int		pid;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	pid = atoi(argv[1]);
+	pid = ft_atoi(argv[1]);
 	if (argc != 3)
 	{
-		ft_printf("error: invalid arguments\n");
+		ft_printf("\x1b[31merror: invalid arguments\n");
 		exit(EXIT_FAILURE);
-	}
-	while (argv[1][j] != '\0')
-	{
-		check_pid(argv[1][j]);
-		j++;
 	}
 	while (argv[2][i] != '\0')
 	{
-		get_binary(argv[2][i], pid);
-		usleep(100);
+		ft_get_binary(argv[2][i], pid);
 		i++;
 	}
 	return (0);

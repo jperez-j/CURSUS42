@@ -16,20 +16,20 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
-all: $(SERVER) $(CLIENT)
+all: $(SERVER) $(CLIENT) 
 
-$(NAME): all
+#$(NAME): all
 
-$(SERVER) : $(LIBFT)
+$(SERVER) : $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(SRC_S) $(LIBFT) $(PRINTF) $(INC) -o $(SERVER)
 
-$(CLIENT) : $(LIBFT)
+$(CLIENT) : $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(SRC_C) $(LIBFT) $(PRINTF) $(INC) -o $(CLIENT)
 
 $(LIBFT) :
 	$(MAKE) -C ./Libft
 
-$(LIBFT) :
+$(PRINTF) :
 	$(MAKE) -C ./ft_printf
 
 clean: 
@@ -37,7 +37,8 @@ clean:
 
 fclean: clean
 	$(RM) $(SERVER) $(CLIENT)
-	$(MAKE) fclean -C $(LIBFT_DIR) $(PRINTF_DIR)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -C $(PRINTF_DIR)
 
 re: fclean all
 

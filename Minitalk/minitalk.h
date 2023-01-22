@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jddperez <jddperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jperez-j <jperez-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:10:58 by jddperez          #+#    #+#             */
-/*   Updated: 2022/12/21 14:16:18 by jddperez         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:40:13 by jperez-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 # include "Libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-# define ANSI_COLOR_RED		"\x1b[31m"
-# define ANSI_COLOR_BLUE	"\x1b[34m"
-# define ANSI_COLOR_GREEN	"\x1b[32m"
-# define ANSI_COLOR_YELLOW	"\x1b[33m"
-# define ANSI_COLOR_RESET	"\x1b[0m"
+void	ft_check_pid(char c);
+void	ft_get_binary(char c, int pid);
 
 #endif
